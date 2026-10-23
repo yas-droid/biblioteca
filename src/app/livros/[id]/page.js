@@ -1,9 +1,14 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { livros } from '@/lib/dados-exemplo';
 
 export default async function DetalheLivro({ params }){
     const { id } = await params;
     const livro = livros.find((l) => l.id === Number(id));
+
+    if(!livro){
+        notFound();
+    }
 
     return(
         <div>
